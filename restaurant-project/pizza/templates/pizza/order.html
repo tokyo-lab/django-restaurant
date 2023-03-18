@@ -8,63 +8,9 @@
   </head>
   <body>
     <h1>Bolzano Italian Cruisine Order</h1>
-    <form>
-      <section>
-        <h2>Choose a size</h2>
-        <input type="radio" id="small-pizza" name="pizza-size" value="small" />
-        <label for="small-pizza">Small</label>
-        <br />
-        <input
-          type="radio"
-          id="medium-pizza"
-          name="pizza-size"
-          value="medium"
-        />
-        <label for="medium-pizza">Medium</label>
-        <br />
-        <input type="radio" id="large-pizza" name="pizza-size" value="large" />
-        <label for="large-pizza">Large</label>
-        <br />
-      </section>
-      <section>
-        <h2>Choose a Crust</h2>
-        <input
-          type="radio"
-          id="regular-crust"
-          name="regular-crust"
-          value="regular"
-        />
-        <label for="regular-crust">Regular Crust</label>
-        <br />
-        <input type="radio" id="thin-crust" name="thin-crust" value="thin" />
-        <label for="thin-crust">Thin Crust</label>
-        <br />
-      </section>
-      <br />
-      <section>
-        <h2>Add-Ons</h2>
-        <input
-          type="checkbox"
-          id="mozzarella"
-          name="mozzarella"
-          value="mozzarella"
-        />
-        <label for="mozzarella">Extra Mozzarella</label><br />
-        <input
-          type="checkbox"
-          id="pepperoni"
-          name="pepperoni"
-          value="pepperoni"
-        />
-        <label for="pepperoni"> Pepperoni</label><br />
-        <input type="checkbox" id="sausage" name="sausage" value="sausage" />
-        <label for="Sausage"> Italian Sausage</label><br />
-        <input type="checkbox" id="onions" name="onions" value="onions" />
-        <label for="Onions">Onions</label><br /><br />
-      </section>
-
-      <br />
-
+    <form action="{% url 'order' %}" method="post">
+      <!-- cross site script -->
+      {% csrf_token %} {{ pizzaform}}
       <input type="submit" value="Submit Order" />
     </form>
   </body>
