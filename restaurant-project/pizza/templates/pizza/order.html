@@ -8,6 +8,7 @@
   </head>
   <body>
     <h1>Bolzano Italian Cruisine Order</h1>
+    <h2>{{ note }}</h2>
     <form action="{% url 'order' %}" method="post">
       <!-- cross site script -->
       {% csrf_token %} {{ pizzaform}}
