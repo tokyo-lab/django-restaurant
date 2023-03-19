@@ -18,5 +18,5 @@ class Crust(models.Model):
 
 
 class Pizza(models.Model):
-    crust = models.CharField(max_length=100, default="Regular")
+    crust = models.ForeignKey(Crust, on_delete=models.CASCADE)
     size = models.ForeignKey(Size, on_delete=models.CASCADE)
