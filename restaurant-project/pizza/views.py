@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .forms import PizzaForm
+from .forms import PizzaForm, CustomerForm
 
 
 def home(request):
@@ -22,4 +22,23 @@ def order(request):
         )
     else:
         form = PizzaForm()
+        return render(request, "pizza/order.html", {"pizzaform": form})
+
+
+def customer(request):
+    if request.method == "POST":
+        filled_form = CustomerForm(request.POST)
+        if filled_form.is_valid():
+            note = "Name: %s Email: %s " % (
+                filled_form.cleaned_data["name"],
+                filled_form.cleaned_data["email"],
+            )
+        else:
+            note = "Customer object is not working"
+        new_customer = CustomerForm()
+        return render(
+            request, "pizza/order.html", {"customer": new_customer, "note": note}
+        )
+    else:
+        form = CustomerForm()
         return render(request, "pizza/order.html", {"pizzaform": form})

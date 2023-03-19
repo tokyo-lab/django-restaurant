@@ -12,6 +12,8 @@
     <form action="{% url 'order' %}" method="post">
       <!-- cross site script -->
       {% csrf_token %} {{ pizzaform}}
+      <br />
+      {{ customerform }}
       <input type="submit" value="Submit Order" />
     </form>
   </body>
