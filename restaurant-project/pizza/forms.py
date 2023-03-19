@@ -1,6 +1,5 @@
 from django import forms
-from .models import Pizza
-from .models import Customer
+from .models import Pizza, Customer
 
 
 class PizzaForm(forms.ModelForm):

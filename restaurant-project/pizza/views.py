@@ -8,37 +8,31 @@ def home(request):
 
 def order(request):
     if request.method == "POST":
-        filled_form = PizzaForm(request.POST)
-        if filled_form.is_valid():
+        filled_pizza_form = PizzaForm(request.POST)
+
+        if filled_pizza_form.is_valid():
             note = "Thanks for ordering! Your %s %s crust pizza is on its way!" % (
-                filled_form.cleaned_data["size"],
-                filled_form.cleaned_data["crust"],
+                filled_pizza_form.cleaned_data["size"],
+                filled_pizza_form.cleaned_data["crust"],
             )
         else:
             note = "Order was not created, please try again"
-        new_form = PizzaForm()
+        new_pizza_form = PizzaForm()
+
         return render(
-            request, "pizza/order.html", {"pizzaform": new_form, "note": note}
+            request,
+            "pizza/order.html",
+            {
+                "pizzaform": new_pizza_form,
+                "note": note,
+            },
         )
     else:
         form = PizzaForm()
-        return render(request, "pizza/order.html", {"pizzaform": form})
+        cust_form = CustomerForm()
 
-
-def customer(request):
-    if request.method == "POST":
-        filled_form = CustomerForm(request.POST)
-        if filled_form.is_valid():
-            note = "Name: %s Email: %s " % (
-                filled_form.cleaned_data["name"],
-                filled_form.cleaned_data["email"],
-            )
-        else:
-            note = "Customer object is not working"
-        new_customer = CustomerForm()
         return render(
-            request, "pizza/order.html", {"customer": new_customer, "note": note}
+            request,
+            "pizza/order.html",
+            {"pizzaform": form, "customerform": cust_form},
         )
-    else:
-        form = CustomerForm()
-        return render(request, "pizza/order.html", {"pizzaform": form})
