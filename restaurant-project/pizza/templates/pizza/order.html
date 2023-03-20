@@ -11,9 +11,11 @@
     <h2>{{ note }}</h2>
     <form action="{% url 'order' %}" method="post">
       <!-- cross site script -->
+      <h2>Pizza Order</h2>
       {% csrf_token %} {{ pizzaform}}
       <br />
       <br />
+      <h2>Customer Details</h2>
       {{ customerform }}
       <br />
       <br />
