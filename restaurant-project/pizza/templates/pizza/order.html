@@ -21,5 +21,11 @@
       <br />
       <input type="submit" value="Submit Order" />
     </form>
+    <h3>Want another pizza?</h3>
+
+    <form action="{% url 'pizzas' %}" method="get">
+      {{ multiple_form }}
+      <input type="submit" value="Get Pizzas" />
+    </form>
   </body>
 </html>

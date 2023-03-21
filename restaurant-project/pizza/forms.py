@@ -21,6 +21,10 @@ class CustomerForm(forms.ModelForm):
         fields = ["name", "email"]
 
 
+class MultiplePizzaForm(forms.Form):
+    number = forms.IntegerField(min_value=2, max_value=5)
+
+
 # class PizzaForm(forms.Form):
 #     size = forms.ChoiceField(
 #         label="Size",
