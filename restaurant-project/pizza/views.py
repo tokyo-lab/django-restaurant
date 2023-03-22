@@ -10,38 +10,30 @@ def home(request):
 def order(request):
     multiple_form = MultiplePizzaForm()
     if request.method == "POST":
-        filled_pizza_form = PizzaForm(request.POST)
-        if filled_pizza_form.is_valid():
-            filled_pizza_form()
-            note = "Thanks for ordering! Your %s %s crust pizza is on its way!" % (
-                filled_pizza_form.cleaned_data["size"],
-                filled_pizza_form.cleaned_data["crust"],
+        filled_form = PizzaForm(request.POST)
+        if filled_form.is_valid():
+            filled_form.save()
+            note = "Thanks for ordering! Your %s %s and %s pizza is on its way!" % (
+                filled_form.cleaned_data["size"],
+                filled_form.cleaned_data["size"],
+                filled_form.cleaned_data["crust"],
             )
-            new_pizza_form = PizzaForm()
-        else:
-            note = "Order was not created, please try again"
-        new_pizza_form = PizzaForm()
-
-        return render(
-            request,
-            "pizza/order.html",
-            {
-                "pizzaform": new_pizza_form,
-                "note": note,
-            },
-        )
+            new_form = PizzaForm()
+            return render(
+                request,
+                "pizza/order.html",
+                {
+                    "pizzaform": new_form,
+                    "note": note,
+                    "multiple_form": multiple_form,
+                },
+            )
     else:
         form = PizzaForm()
-        cust_form = CustomerForm()
-
         return render(
             request,
             "pizza/order.html",
-            {
-                "pizzaform": form,
-                "customerform": cust_form,
-                "multiple_form": multiple_form,
-            },
+            {"multiple_form": multiple_form, "pizzaform": form},
         )
 
 
