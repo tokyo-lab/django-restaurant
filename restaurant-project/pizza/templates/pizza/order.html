@@ -24,7 +24,7 @@
     <h3>Want another pizza?</h3>
 
     <form action="{% url 'pizzas' %}" method="get">
-      {{ multiple_form }}
+      {% csrf_token %} {{ multiple_form }}
       <input type="submit" value="Get Pizzas" />
     </form>
   </body>

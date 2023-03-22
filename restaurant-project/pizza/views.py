@@ -12,10 +12,12 @@ def order(request):
     if request.method == "POST":
         filled_pizza_form = PizzaForm(request.POST)
         if filled_pizza_form.is_valid():
+            filled_pizza_form()
             note = "Thanks for ordering! Your %s %s crust pizza is on its way!" % (
                 filled_pizza_form.cleaned_data["size"],
                 filled_pizza_form.cleaned_data["crust"],
             )
+            new_pizza_form = PizzaForm()
         else:
             note = "Order was not created, please try again"
         new_pizza_form = PizzaForm()
@@ -58,7 +60,6 @@ def pizzas(request):
             note = "Pizzas have been ordered!"
         else:
             note = "Order was not created, please try again"
-
         return render(request, "pizza/pizzas.html", {"note": note, "formset": formset})
     else:
         return render(request, "pizza/pizzas.html", {"formset": formset})
