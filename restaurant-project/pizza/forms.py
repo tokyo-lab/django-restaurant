@@ -6,7 +6,7 @@ class PizzaForm(forms.ModelForm):
     class Meta:
         model = Pizza
         fields = ["size", "crust", "addons"]
-        labels = {""}
+        labels = {"size": "Size", "crust": "Crust", "addons": "Addons"}
         widgets = {
             "size": forms.RadioSelect,
             "crust": forms.RadioSelect,
