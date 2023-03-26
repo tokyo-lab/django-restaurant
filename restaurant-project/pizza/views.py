@@ -15,8 +15,8 @@ def order(request):
             filled_form.save()
             note = "Thanks for ordering! Your %s %s and %s pizza is on its way!" % (
                 filled_form.cleaned_data["size"],
-                filled_form.cleaned_data["size"],
-                filled_form.cleaned_data["crust"],
+                filled_form.cleaned_data["topping1"],
+                filled_form.cleaned_data["topping2"],
             )
             new_form = PizzaForm()
             return render(
@@ -48,7 +48,7 @@ def pizzas(request):
         filled_formset = PizzaFormSet(request.POST)
         if filled_formset.is_valid():
             for form in filled_formset:
-                print(form.cleaned_data["crust"])
+                print(form.cleaned_data["topping1"])
             note = "Pizzas have been ordered!"
         else:
             note = "Order was not created, please try again"
