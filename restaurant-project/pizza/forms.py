@@ -7,11 +7,11 @@ class PizzaForm(forms.ModelForm):
         model = Pizza
         fields = ["size", "crust", "addons"]
         labels = {"size": "Size", "crust": "Crust", "addons": "Addons"}
-        widgets = {
-            "size": forms.RadioSelect,
-            "crust": forms.RadioSelect,
-            "addons": forms.CheckboxSelectMultiple,
-        }
+        # widgets = {
+        #     "size": forms.RadioSelect,
+        #     "crust": forms.RadioSelect,
+        #     "addons": forms.CheckboxSelectMultiple,
+        # }
 
 
 class CustomerForm(forms.ModelForm):

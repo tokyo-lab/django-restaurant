@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .forms import PizzaForm, CustomerForm, MultiplePizzaForm
+from .forms import PizzaForm, MultiplePizzaForm
 from django.forms import formset_factory
 
 
