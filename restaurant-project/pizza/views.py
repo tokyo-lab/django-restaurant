@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from .forms import PizzaForm, MultiplePizzaForm
 from django.forms import formset_factory
+from .models import Pizza
 
 
 def home(request):
