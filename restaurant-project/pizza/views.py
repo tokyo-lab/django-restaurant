@@ -65,7 +65,17 @@ def edit_order(request, pk):
     form = PizzaForm(instance=pizza)
     if request.method == "POST":
         filled_form = PizzaForm(request.POST, instance=pizza)
-        if filled_form.is_invalid():
+        if filled_form.is_valid():
             filled_form.save()
             form = filled_form
-    return render(request, "pizza/edit_order.html", {"pizzaform": form, "pizza": pizza})
+            note = "Order has been updated"
+            return render(
+                request,
+                "pizza/edit_order.html",
+                {"note": note, "pizzaform": form, "pizza": pizza},
+            )
+    return render(
+        request,
+        "pizza/edit_order.html",
+        {"pizzaform": form, "pizza": pizza},
+    )
