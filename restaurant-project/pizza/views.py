@@ -11,6 +11,7 @@ def home(request):
 def order(request):
     multiple_form = MultiplePizzaForm()
     if request.method == "POST":
+        created_pizza_pk = None
         filled_form = PizzaForm(request.POST)
         if filled_form.is_valid():
             created_pizza = filled_form.save()
@@ -22,19 +23,18 @@ def order(request):
             )
             filled_form = PizzaForm()
         else:
-            created_pizza_pk = None
-            note = "Pizza order has failed. Try again."
-
-            return render(
-                request,
-                "pizza/order.html",
-                {
-                    "created_pizza_pk": created_pizza_pk,
-                    "pizzaform": filled_form,
-                    "note": note,
-                    "multiple_form": multiple_form,
-                },
-            )
+            note = "Order was not created, please try again"
+        new_form = PizzaForm()
+        return render(
+            request,
+            "pizza/order.html",
+            {
+                "multiple_form": multiple_form,
+                "pizzaform": filled_form,
+                "note": note,
+                "created_pizza_pk": created_pizza_pk,
+            },
+        )
     else:
         form = PizzaForm()
         return render(
@@ -42,6 +42,23 @@ def order(request):
             "pizza/order.html",
             {"multiple_form": multiple_form, "pizzaform": form},
         )
+
+
+def edit_order(request, pk):
+    pizza = Pizza.objects.get(pk=pk)
+    form = PizzaForm(instance=pizza)
+    if request.method == "POST":
+        filled_form = PizzaForm(request.POST, instance=pizza)
+        if filled_form.is_valid():
+            filled_form.save()
+            form = filled_form
+            note = "Your order has been processed."
+            return render(
+                request,
+                "pizza/edit_order.html",
+                {"pizzaform": form, "pizza": pizza, "note": note},
+            )
+    return render(request, "pizza/edit_order.html", {"pizzaform": form, "pizza": pizza})
 
 
 def pizzas(request):
@@ -59,27 +76,7 @@ def pizzas(request):
             note = "Pizzas have been ordered!"
         else:
             note = "Order was not created, please try again"
+
         return render(request, "pizza/pizzas.html", {"note": note, "formset": formset})
     else:
         return render(request, "pizza/pizzas.html", {"formset": formset})
-
-
-def edit_order(request, pk):
-    pizza = Pizza.objects.get(pk=pk)
-    form = PizzaForm(instance=pizza)
-    if request.method == "POST":
-        filled_form = PizzaForm(request.POST, instance=pizza)
-        if filled_form.is_valid():
-            filled_form.save()
-            form = filled_form
-            note = "Order has been updated"
-            return render(
-                request,
-                "pizza/edit_order.html",
-                {"note": note, "pizzaform": form, "pizza": pizza},
-            )
-    return render(
-        request,
-        "pizza/edit_order.html",
-        {"pizzaform": form, "pizza": pizza},
-    )
