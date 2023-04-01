@@ -1,5 +1,5 @@
 from django import forms
-from .models import Pizza, Size
+from .models import Pizza
 
 # class PizzaForm(forms.Form):
 #     topping1 = forms.CharField(label='Topping 1', max_length=100)
