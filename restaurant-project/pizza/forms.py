@@ -1,6 +1,5 @@
 from django import forms
-
-from .models import Pizza
+from .models import Pizza, Size
 
 # class PizzaForm(forms.Form):
 #     topping1 = forms.CharField(label='Topping 1', max_length=100)
@@ -9,10 +8,6 @@ from .models import Pizza
 
 
 class PizzaForm(forms.ModelForm):
-
-    email = forms.EmailField()
-    url = forms.URLField()
-
     class Meta:
         model = Pizza
         fields = ["topping1", "topping2", "size"]

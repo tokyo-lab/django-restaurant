@@ -9,6 +9,6 @@ class Size(models.Model):
 
 
 class Pizza(models.Model):
-    topping1 = models.CharField(max_length=100, blank=True, null=True)
-    topping2 = models.CharField(max_length=100, blank=True, null=True)
+    topping1 = models.CharField(max_length=100)
+    topping2 = models.CharField(max_length=100)
     size = models.ForeignKey(Size, on_delete=models.CASCADE)
